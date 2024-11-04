@@ -1,0 +1,127 @@
+menuconfig CHERRYUSB
+    bool "CherryUSB Configuration"
+    default n
+
+if CHERRYUSB
+
+    menuconfig CHERRYUSB_DEVICE
+        bool "Enable usb device mode"
+        default n
+
+    if CHERRYUSB_DEVICE
+        choice
+            prompt "Select usb device speed"
+            default CHERRYUSB_DEVICE_SPEED_FS
+            config CHERRYUSB_DEVICE_SPEED_FS
+                bool "FS"
+            config CHERRYUSB_DEVICE_SPEED_HS
+                bool "HS"
+            config CHERRYUSB_DEVICE_SPEED_AUTO
+                bool "AUTO"
+        endchoice
+
+        config CHERRYUSB_DEVICE_DCD
+            string
+            default "fsdev" if CHERRYUSB_DEVICE_FSDEV
+            default "dwc2_st" if CHERRYUSB_DEVICE_DWC2_ST
+            default "dwc2_esp" if CHERRYUSB_DEVICE_DWC2_ESP
+            default "dwc2_at" if CHERRYUSB_DEVICE_DWC2_AT
+            default "dwc2_gd" if CHERRYUSB_DEVICE_DWC2_GD
+            default "dwc2_custom" if CHERRYUSB_DEVICE_DWC2_CUSTOM
+            default "musb_standard" if CHERRYUSB_DEVICE_MUSB_STANDARD
+            default "musb_sunxi" if CHERRYUSB_DEVICE_MUSB_SUNXI
+            default "musb_custom" if CHERRYUSB_DEVICE_MUSB_CUSTOM
+            default "bouffalo" if CHERRYUSB_DEVICE_BL
+            default "hpm" if CHERRYUSB_DEVICE_HPM
+            default "aic" if CHERRYUSB_DEVICE_AIC
+            default "ch32" if CHERRYUSB_DEVICE_CH32
+            default "pusb2" if CHERRYUSB_DEVICE_PUSB2
+
+        choice
+            prompt "Select usb device ip, and some ip need config in usb_config.h, please check"
+            default CHERRYUSB_DEVICE_CUSTOM
+            config CHERRYUSB_DEVICE_CUSTOM
+                bool "CUSTOM (Implement it yourself)"
+            config CHERRYUSB_DEVICE_FSDEV
+                bool "fsdev"
+            config CHERRYUSB_DEVICE_DWC2_ST
+                bool "dwc2_st"
+            config CHERRYUSB_DEVICE_DWC2_ESP
+                bool "dwc2_esp"
+            config CHERRYUSB_DEVICE_DWC2_AT
+                bool "dwc2_at"
+            config CHERRYUSB_DEVICE_DWC2_GD
+                bool "dwc2_gd"
+            config CHERRYUSB_DEVICE_DWC2_CUSTOM
+                bool "dwc2_custom"
+            config CHERRYUSB_DEVICE_MUSB_STANDARD
+                bool "musb_standard"
+            config CHERRYUSB_DEVICE_MUSB_SUNXI
+                bool "musb_sunxi"
+            config CHERRYUSB_DEVICE_MUSB_CUSTOM
+                bool "musb_custom"
+            config CHERRYUSB_DEVICE_BL
+                bool "bouffalo"
+            config CHERRYUSB_DEVICE_HPM
+                bool "hpm"
+            config CHERRYUSB_DEVICE_AIC
+                bool "aic"
+            config CHERRYUSB_DEVICE_CH32
+                bool "ch32"
+            config CHERRYUSB_DEVICE_PUSB2
+                bool "pusb2"
+        endchoice
+
+        config CHERRYUSB_DEVICE_CDC
+            bool
+            prompt "Enable usb cdc acm device"
+            default n
+
+        config CHERRYUSB_DEVICE_HID
+            bool
+            prompt "Enable usb hid device"
+            default n
+
+        config CHERRYUSB_DEVICE_MSC
+            bool
+            prompt "Enable usb msc device"
+            default n
+
+        config CHERRYUSB_DEVICE_WINUSB
+            bool
+            prompt "Enable usb winusb20 device"
+            default n
+
+        # config CHERRYUSB_DEVICE_AUDIO
+        #     bool
+        #     prompt "Enable usb audio device"
+        #     default n
+
+        # config CHERRYUSB_DEVICE_VIDEO
+        #     bool
+        #     prompt "Enable usb video device"
+        #     default n
+
+        # config CHERRYUSB_DEVICE_CDC_RNDIS
+        #     bool
+        #     prompt "Enable usb cdc rndis device"
+        #     default n
+
+        # config CHERRYUSB_DEVICE_CDC_ECM
+        #     bool
+        #     prompt "Enable usb cdc ecm device"
+        #     default n
+
+        # config CHERRYUSB_DEVICE_CDC_NCM
+        #     bool
+        #     prompt "Enable usb cdc ncm device"
+        #     default n
+
+        config CHERRYUSB_DEVICE_DFU
+            bool
+            prompt "Enable usb dfu device"
+            default n
+
+    endif # CHERRYUSB_DEVICE
+
+endif # CHERRYUSB
